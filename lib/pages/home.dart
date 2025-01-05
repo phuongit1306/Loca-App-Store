@@ -9,7 +9,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool icecream = false, pizza = false, salad = false, burger = false;
+  bool food = false, drink = false, quanao = false, family = false;
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +206,10 @@ class _HomeState extends State<Home> {
       children: [
         GestureDetector(
           onTap: () {
-            icecream = true;
-            pizza = false;
-            salad = false;
-            burger = false;
+            food = true;
+            drink = false;
+            quanao = false;
+            family = false;
             setState(() {});
           },
           child: Material(
@@ -217,25 +217,25 @@ class _HomeState extends State<Home> {
             borderRadius: BorderRadius.circular(10),
             child: Container(
               decoration: BoxDecoration(
-                  color: icecream ? Colors.black : Colors.white,
+                  color: food ? Colors.black : Colors.white,
                   borderRadius: BorderRadius.circular(10)),
               padding: EdgeInsets.all(8),
               child: Image.asset(
-                "images/ice-cream.png",
+                "images/food.png",
                 height: 50,
                 width: 50,
                 fit: BoxFit.cover,
-                color: icecream ? Colors.white : Colors.black,
+                color: food ? Colors.white : Colors.black,
               ),
             ),
           ),
         ),
         GestureDetector(
           onTap: () {
-            icecream = false;
-            pizza = true;
-            salad = false;
-            burger = false;
+            food = false;
+            drink = true;
+            quanao = false;
+            family = false;
             setState(() {});
           },
           child: Material(
@@ -243,25 +243,25 @@ class _HomeState extends State<Home> {
             borderRadius: BorderRadius.circular(10),
             child: Container(
               decoration: BoxDecoration(
-                  color: pizza ? Colors.black : Colors.white,
+                  color: drink ? Colors.black : Colors.white,
                   borderRadius: BorderRadius.circular(10)),
               padding: EdgeInsets.all(8),
               child: Image.asset(
-                "images/pizza.png",
+                "images/drink.png",
                 height: 50,
                 width: 50,
                 fit: BoxFit.cover,
-                color: pizza ? Colors.white : Colors.black,
+                color: drink ? Colors.white : Colors.black,
               ),
             ),
           ),
         ),
         GestureDetector(
           onTap: () {
-            icecream = false;
-            pizza = false;
-            salad = true;
-            burger = false;
+            food = false;
+            drink = false;
+            quanao = true;
+            family = false;
             setState(() {});
           },
           child: Material(
@@ -269,25 +269,25 @@ class _HomeState extends State<Home> {
             borderRadius: BorderRadius.circular(10),
             child: Container(
               decoration: BoxDecoration(
-                  color: salad ? Colors.black : Colors.white,
+                  color: quanao ? Colors.black : Colors.white,
                   borderRadius: BorderRadius.circular(10)),
               padding: EdgeInsets.all(8),
               child: Image.asset(
-                "images/salad.png",
+                "images/quanao.png",
                 height: 50,
                 width: 50,
                 fit: BoxFit.cover,
-                color: salad ? Colors.white : Colors.black,
+                color: quanao ? Colors.white : Colors.black,
               ),
             ),
           ),
         ),
         GestureDetector(
           onTap: () {
-            icecream = false;
-            pizza = false;
-            salad = false;
-            burger = true;
+            food = false;
+            drink = false;
+            quanao = false;
+            family = true;
             setState(() {});
           },
           child: Material(
@@ -295,15 +295,15 @@ class _HomeState extends State<Home> {
             borderRadius: BorderRadius.circular(10),
             child: Container(
               decoration: BoxDecoration(
-                  color: burger ? Colors.black : Colors.white,
+                  color: family ? Colors.black : Colors.white,
                   borderRadius: BorderRadius.circular(10)),
               padding: EdgeInsets.all(8),
               child: Image.asset(
-                "images/burger.png",
+                "images/family.png",
                 height: 50,
                 width: 50,
                 fit: BoxFit.cover,
-                color: burger ? Colors.white : Colors.black,
+                color: family ? Colors.white : Colors.black,
               ),
             ),
           ),
