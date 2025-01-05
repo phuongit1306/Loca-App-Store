@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loca_app2/pages/details.dart';
 import 'package:loca_app2/widget/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -52,41 +53,47 @@ class _HomeState extends State<Home> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  Container(
-                    margin: EdgeInsets.all(4),
-                    child: Material(
-                      elevation: 5.0,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        padding: EdgeInsets.all(14),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "images/login3.jpg",
-                              height: 150,
-                              width: 150,
-                              fit: BoxFit.cover,
-                            ),
-                            Text(
-                              "Veggie Taco Hash",
-                              style: AppWidget.semiBooldTextFieldStyle(),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(
-                              "Fresh and Healthy",
-                              style: AppWidget.LightTextFieldStyle(),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(
-                              "50.000 VNĐ",
-                              style: AppWidget.semiBooldTextFieldStyle(),
-                            )
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Details()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(4),
+                      child: Material(
+                        elevation: 5.0,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          padding: EdgeInsets.all(14),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                "images/bunthai.jpg",
+                                height: 150,
+                                width: 150,
+                                fit: BoxFit.cover,
+                              ),
+                              Text(
+                                "Veggie Taco Hash",
+                                style: AppWidget.semiBooldTextFieldStyle(),
+                              ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Text(
+                                "Fresh and Healthy",
+                                style: AppWidget.LightTextFieldStyle(),
+                              ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Text(
+                                "50.000 VNĐ",
+                                style: AppWidget.semiBooldTextFieldStyle(),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -105,7 +112,7 @@ class _HomeState extends State<Home> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image.asset(
-                              "images/login3.jpg",
+                              "images/salad4.png",
                               height: 150,
                               width: 150,
                               fit: BoxFit.cover,
@@ -150,7 +157,7 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        "images/login3.jpg",
+                        "images/bunthai.jpg",
                         height: 120,
                         width: 120,
                         fit: BoxFit.cover,
