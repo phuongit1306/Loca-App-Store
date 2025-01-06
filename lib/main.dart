@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loca_app2/pages/bottomnav.dart';
 import 'package:loca_app2/pages/home.dart';
 import 'package:loca_app2/pages/login.dart';
+import 'package:loca_app2/pages/onboard.dart';
+import 'package:loca_app2/pages/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: LogIn());
+        home: Onboard());
   }
 }
 

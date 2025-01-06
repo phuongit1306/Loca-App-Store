@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loca_app2/pages/signup.dart';
 import 'package:loca_app2/widget/widget_support.dart';
 
 class LogIn extends StatefulWidget {
@@ -45,7 +46,7 @@ class _LogInState extends State<LogIn> {
                 children: [
                   Center(
                       child: Image.asset(
-                    "images/logo1.png",
+                    "images/logo2.png",
                     width: MediaQuery.of(context).size.width / 1.5,
                     fit: BoxFit.cover,
                   )),
@@ -131,9 +132,15 @@ class _LogInState extends State<LogIn> {
                   SizedBox(
                     height: 70.0,
                   ),
-                  Text(
-                    "Don't have an account? Sign up",
-                    style: AppWidget.semiBooldTextFieldStyle(),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUp()));
+                    },
+                    child: Text(
+                      "Don't have an account? Sign up",
+                      style: AppWidget.semiBooldTextFieldStyle(),
+                    ),
                   ),
                 ],
               ),

@@ -46,11 +46,11 @@ class _DetailsState extends State<Details> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Mediterranean",
+                      "[Quán HaXi]",
                       style: AppWidget.semiBooldTextFieldStyle(),
                     ),
                     Text(
-                      "Chickpea Salad",
+                      "Bún Thái",
                       style: AppWidget.HeadlineTextFieldStyle(),
                     ),
                   ],
@@ -104,7 +104,7 @@ class _DetailsState extends State<Details> {
               height: 20.0,
             ),
             Text(
-              "it will be very helpful if you add - how to make a system in this app in which. aaaaaaaaaaaaaaaaaaaaaaaaaaaa. bbbbbbbbbbbbbbbbbbbb.",
+              "Với vị chua chua ngọt của sốt cà chua, xả, thơm, rong biển miền Trung. Ăn kèm bún gạo lứt, chả tàu hũ ky, củ sen, cà rốt..",
               style: AppWidget.LightTextFieldStyle(),
             ),
             SizedBox(
@@ -113,7 +113,7 @@ class _DetailsState extends State<Details> {
             Row(
               children: [
                 Text(
-                  "Delivery Time",
+                  "Giao ngay\nThời gian dự kiến",
                   style: AppWidget.semiBooldTextFieldStyle(),
                 ),
                 SizedBox(
@@ -146,22 +146,22 @@ class _DetailsState extends State<Details> {
                         style: AppWidget.semiBooldTextFieldStyle(),
                       ),
                       Text(
-                        "100.000 VNĐ",
+                        "100.000đ",
                         style: AppWidget.HeadlineTextFieldStyle(),
                       ),
                     ],
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    padding: EdgeInsets.all(8),
+                    width: MediaQuery.of(context).size.width / 1.7,
+                    padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         color: Colors.black,
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(8)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Add to cart",
+                          "Thêm vào giỏ hàng",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.0,

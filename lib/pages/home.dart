@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Xin chào Phương,", style: AppWidget.boldTextFieldStyle()),
+                Text("Xin chào bạn", style: AppWidget.boldTextFieldStyle()),
                 Container(
                   margin: EdgeInsets.only(right: 20.0),
                   padding: EdgeInsets.all(3),
@@ -41,7 +41,8 @@ class _HomeState extends State<Home> {
               height: 23.0,
             ),
             Text("Loca App Store", style: AppWidget.HeadlineTextFieldStyle()),
-            Text("Loca App ", style: AppWidget.LightTextFieldStyle()),
+            Text("App bán lẻ thịnh hành nhất hiện nay",
+                style: AppWidget.LightTextFieldStyle()),
             SizedBox(
               height: 20.0,
             ),
@@ -75,21 +76,21 @@ class _HomeState extends State<Home> {
                                 fit: BoxFit.cover,
                               ),
                               Text(
-                                "Veggie Taco Hash",
+                                "Bún Thái",
                                 style: AppWidget.semiBooldTextFieldStyle(),
                               ),
                               SizedBox(
                                 height: 5.0,
                               ),
                               Text(
-                                "Fresh and Healthy",
+                                "Đang bán chạy",
                                 style: AppWidget.LightTextFieldStyle(),
                               ),
                               SizedBox(
                                 height: 5.0,
                               ),
                               Text(
-                                "50.000 VNĐ",
+                                "đ50.000",
                                 style: AppWidget.semiBooldTextFieldStyle(),
                               )
                             ],
@@ -118,21 +119,21 @@ class _HomeState extends State<Home> {
                               fit: BoxFit.cover,
                             ),
                             Text(
-                              "Mix Veg Salad",
+                              "Salad Rau Củ Trộn",
                               style: AppWidget.semiBooldTextFieldStyle(),
                             ),
                             SizedBox(
                               height: 5.0,
                             ),
                             Text(
-                              "Fresh and Healthy",
+                              "(Xà lách, bông cải,...)",
                               style: AppWidget.LightTextFieldStyle(),
                             ),
                             SizedBox(
                               height: 5.0,
                             ),
                             Text(
-                              "50.000 VNĐ",
+                              "đ65.000",
                               style: AppWidget.semiBooldTextFieldStyle(),
                             ),
                           ],
@@ -170,7 +171,7 @@ class _HomeState extends State<Home> {
                           Container(
                             width: MediaQuery.of(context).size.width / 2,
                             child: Text(
-                              "Mediterranean Chickpea Salad",
+                              "Bún Thái",
                               style: AppWidget.semiBooldTextFieldStyle(),
                             ),
                           ),
@@ -180,17 +181,17 @@ class _HomeState extends State<Home> {
                           Container(
                             width: MediaQuery.of(context).size.width / 2,
                             child: Text(
-                              "Honey Good Cheese",
+                              "(Tôm, kim chi, mực,...)",
                               style: AppWidget.LightTextFieldStyle(),
                             ),
                           ),
                           SizedBox(
-                            height: 5.0,
+                            height: 25.0,
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width / 2,
                             child: Text(
-                              "50.000 VNĐ",
+                              "đ50.000",
                               style: AppWidget.semiBooldTextFieldStyle(),
                             ),
                           ),
