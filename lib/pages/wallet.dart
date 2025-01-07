@@ -91,12 +91,14 @@ class _WalletState extends State<Wallet> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    makePayment('50');
+                    print('Tapped 50.000');
+                    makePayment('50.000');
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 69, 228, 55)),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
@@ -107,12 +109,13 @@ class _WalletState extends State<Wallet> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    makePayment('100');
+                    makePayment('100.000');
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 48, 221, 233)),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
@@ -123,12 +126,13 @@ class _WalletState extends State<Wallet> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    makePayment('200');
+                    makePayment('200.000');
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 233, 229, 23)),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
@@ -139,12 +143,13 @@ class _WalletState extends State<Wallet> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    makePayment('500');
+                    makePayment('500.000');
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 241, 23, 23)),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
@@ -163,7 +168,7 @@ class _WalletState extends State<Wallet> {
               padding: EdgeInsets.symmetric(vertical: 12.0),
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Color(0xFF008080),
+                color: Color.fromARGB(255, 221, 18, 18),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
@@ -171,7 +176,7 @@ class _WalletState extends State<Wallet> {
                   "Thêm Tiền",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16.0,
+                    fontSize: 20.0,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                   ),
@@ -186,20 +191,24 @@ class _WalletState extends State<Wallet> {
 
   Future<void> makePayment(String amount) async {
     try {
-      paymentIntent = await createPaymentIntent(amount, 'INR');
-      //Payment Sheet
-      await Stripe.instance
-          .initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
-                  // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
-                  style: ThemeMode.dark,
-                  merchantDisplayName: 'Adnan'))
-          .then((value) {});
+      print("Making payment for: $amount");
+      paymentIntent = await createPaymentIntent(amount, 'VND');
 
-      ///now finally display payment sheeet
-      displayPaymentSheet(amount);
+      if (paymentIntent != null) {
+        await Stripe.instance
+            .initPaymentSheet(
+              paymentSheetParameters: SetupPaymentSheetParameters(
+                paymentIntentClientSecret: paymentIntent!['client_secret'],
+                style: ThemeMode.dark,
+                merchantDisplayName: 'Adnan',
+              ),
+            )
+            .then((value) {});
+
+        displayPaymentSheet(amount);
+      } else {
+        print("paymentIntent is null");
+      }
     } catch (e, s) {
       print('exception:$e$s');
     }
@@ -220,15 +229,12 @@ class _WalletState extends State<Wallet> {
                             Icons.check_circle,
                             color: Colors.green,
                           ),
-                          Text("Payment Successfull"),
+                          Text("Thanh toán thành công"),
                         ],
                       ),
                     ],
                   ),
                 ));
-
-        // ignore: use_build_context_synchronously
-
         paymentIntent = null;
       }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');
@@ -238,7 +244,7 @@ class _WalletState extends State<Wallet> {
       showDialog(
           context: context,
           builder: (_) => const AlertDialog(
-                content: Text("Cancelled "),
+                content: Text("Hủy bỏ "),
               ));
     } catch (e) {
       print('$e');
@@ -272,8 +278,14 @@ class _WalletState extends State<Wallet> {
   }
 
   calculateAmount(String amount) {
-    final calculatedAmout = (int.parse(amount)) * 100;
-
-    return calculatedAmout.toString();
+    // Loại bỏ tất cả dấu chấm và chuyển đổi chuỗi thành số
+    final cleanedAmount = amount.replaceAll('.', '');
+    try {
+      final calculatedAmount = int.parse(cleanedAmount);
+      return (calculatedAmount).toString();
+    } catch (e) {
+      print("Error parsing amount: $e");
+      return '0';
+    }
   }
 }

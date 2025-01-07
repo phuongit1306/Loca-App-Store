@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loca_app2/pages/bottomnav.dart';
 import 'package:loca_app2/pages/login.dart';
+import 'package:loca_app2/service/database.dart';
 import 'package:loca_app2/widget/widget_support.dart';
+import 'package:random_string/random_string.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -34,6 +36,16 @@ class _SignUpState extends State<SignUp> {
               "Đã đăng ký thành công",
               style: TextStyle(fontSize: 20.0),
             ))));
+
+        String Id = randomAlphaNumeric(10);
+        Map<String, dynamic> addUserInfo = {
+          "Name": namecontroller.text,
+          "Email": mailcontroller.text,
+          "Wallet": "0",
+          "Id": Id,
+        };
+        await DatabaseMethods().addUserDetail(addUserInfo, Id);
+
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => BottomNav()));
