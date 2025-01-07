@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loca_app2/pages/details.dart';
+import 'package:loca_app2/service/database.dart';
 import 'package:loca_app2/widget/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -11,6 +13,36 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool food = false, drink = false, quanao = false, family = false;
+
+  Stream? itemStream;
+
+  ontheLoad() async {
+    itemStream = await DatabaseMethods().getItem("Drink");
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    ontheLoad();
+    super.initState();
+  }
+
+  Widget allItems() {
+    return StreamBuilder(
+        stream: itemStream,
+        builder: (context, AsyncSnapshot snapshot) {
+          return snapshot.hasData
+              ? ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: snapshot.data.docs.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    DocumentSnapshot ds = snapshot.data.docs[index];
+                  })
+              : CircularProgressIndicator();
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
