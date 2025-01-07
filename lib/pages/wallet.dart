@@ -19,7 +19,6 @@ class Wallet extends StatefulWidget {
 class _WalletState extends State<Wallet> {
   String? wallet, id;
   int? add;
-  TextEditingController amountcontroller = new TextEditingController();
 
   getthesharedpref() async {
     wallet = await SharedPreferenceHelper().getUserWallet();
