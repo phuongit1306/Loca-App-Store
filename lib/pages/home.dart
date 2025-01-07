@@ -41,8 +41,14 @@ class _HomeState extends State<Home> {
                     DocumentSnapshot ds = snapshot.data.docs[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Details()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Details(
+                                      detail: ds["Detail"],
+                                      name: ds["Name"],
+                                      price: ds["Price"],
+                                    )));
                       },
                       child: Container(
                         margin: EdgeInsets.only(right: 20.0, bottom: 5.0),
@@ -120,8 +126,14 @@ class _HomeState extends State<Home> {
                     DocumentSnapshot ds = snapshot.data.docs[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Details()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Details(
+                                      detail: ds["Detail"],
+                                      name: ds["Name"],
+                                      price: ds["Price"],
+                                    )));
                       },
                       child: Container(
                         margin: EdgeInsets.all(4),

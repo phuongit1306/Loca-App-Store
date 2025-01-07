@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loca_app2/widget/widget_support.dart';
 
 class Details extends StatefulWidget {
-  const Details({super.key});
+  String name, detail, price;
+  Details({required this.detail, required this.name, required this.price});
 
   @override
   State<Details> createState() => _DetailsState();
@@ -31,27 +32,14 @@ class _DetailsState extends State<Details> {
             SizedBox(
               height: 20.0,
             ),
-            Image.asset(
-              "images/bunthai.jpg",
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2.5,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
             Row(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "[Quán HaXi]",
+                      widget.name,
                       style: AppWidget.semiBooldTextFieldStyle(),
-                    ),
-                    Text(
-                      "Bún Thái",
-                      style: AppWidget.HeadlineTextFieldStyle(),
                     ),
                   ],
                 ),
@@ -104,7 +92,8 @@ class _DetailsState extends State<Details> {
               height: 20.0,
             ),
             Text(
-              "Với vị chua chua ngọt của sốt cà chua, xả, thơm, rong biển miền Trung. Ăn kèm bún gạo lứt, chả tàu hũ ky, củ sen, cà rốt..",
+              widget.detail,
+              maxLines: 4,
               style: AppWidget.LightTextFieldStyle(),
             ),
             SizedBox(
@@ -146,7 +135,7 @@ class _DetailsState extends State<Details> {
                         style: AppWidget.semiBooldTextFieldStyle(),
                       ),
                       Text(
-                        "100.000đ",
+                        "\đ" + widget.price,
                         style: AppWidget.HeadlineTextFieldStyle(),
                       ),
                     ],
