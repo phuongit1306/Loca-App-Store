@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:loca_app2/pages/bottomnav.dart';
 import 'package:loca_app2/pages/login.dart';
 import 'package:loca_app2/service/database.dart';
+import 'package:loca_app2/service/shared_pref.dart';
 import 'package:loca_app2/widget/widget_support.dart';
 import 'package:random_string/random_string.dart';
 
@@ -45,6 +46,10 @@ class _SignUpState extends State<SignUp> {
           "Id": Id,
         };
         await DatabaseMethods().addUserDetail(addUserInfo, Id);
+        await SharedPreferenceHelper().saveUserName(namecontroller.text);
+        await SharedPreferenceHelper().saveUserEmail(mailcontroller.text);
+        await SharedPreferenceHelper().saveUserWallet('0');
+        await SharedPreferenceHelper().saveUserId(Id);
 
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
