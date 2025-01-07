@@ -27,6 +27,85 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  Widget allItemsVertically() {
+    return StreamBuilder(
+        stream: itemStream,
+        builder: (context, AsyncSnapshot snapshot) {
+          return snapshot.hasData
+              ? ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: snapshot.data.docs.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    DocumentSnapshot ds = snapshot.data.docs[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Details()));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: 20.0, bottom: 5.0),
+                        child: Material(
+                          elevation: 5.0,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 20.0,
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
+                                      child: ClipRRect(
+                                        child: Text(
+                                          ds["Name"],
+                                          style: AppWidget
+                                              .semiBooldTextFieldStyle(),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
+                                      child: Text(
+                                        "(Tôm, kim chi, mực,...)",
+                                        style: AppWidget.LightTextFieldStyle(),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 25.0,
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
+                                      child: Text(
+                                        "\đ" + ds["Price"],
+                                        style:
+                                            AppWidget.semiBooldTextFieldStyle(),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  })
+              : CircularProgressIndicator();
+        });
+  }
+
   Widget allItems() {
     return StreamBuilder(
         stream: itemStream,
@@ -39,6 +118,48 @@ class _HomeState extends State<Home> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     DocumentSnapshot ds = snapshot.data.docs[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Details()));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(4),
+                        child: Material(
+                          elevation: 5.0,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            padding: EdgeInsets.all(14),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Text(
+                                    ds["Name"],
+                                    style: AppWidget.semiBooldTextFieldStyle(),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  "Đang bán chạy",
+                                  style: AppWidget.LightTextFieldStyle(),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  "\đ" + ds["Price"],
+                                  style: AppWidget.semiBooldTextFieldStyle(),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
                   })
               : CircularProgressIndicator();
         });
@@ -82,158 +203,8 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 30.0,
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Details()));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(4),
-                      child: Material(
-                        elevation: 5.0,
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          padding: EdgeInsets.all(14),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                "images/bunthai.jpg",
-                                height: 150,
-                                width: 150,
-                                fit: BoxFit.cover,
-                              ),
-                              Text(
-                                "Bún Thái",
-                                style: AppWidget.semiBooldTextFieldStyle(),
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                "Đang bán chạy",
-                                style: AppWidget.LightTextFieldStyle(),
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                "đ50.000",
-                                style: AppWidget.semiBooldTextFieldStyle(),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15.0,
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(4),
-                    child: Material(
-                      elevation: 5.0,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        padding: EdgeInsets.all(14),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "images/salad4.png",
-                              height: 150,
-                              width: 150,
-                              fit: BoxFit.cover,
-                            ),
-                            Text(
-                              "Salad Rau Củ Trộn",
-                              style: AppWidget.semiBooldTextFieldStyle(),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(
-                              "(Xà lách, bông cải,...)",
-                              style: AppWidget.LightTextFieldStyle(),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Text(
-                              "đ65.000",
-                              style: AppWidget.semiBooldTextFieldStyle(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Container(
-              margin: EdgeInsets.only(right: 20.0),
-              child: Material(
-                elevation: 5.0,
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        "images/bunthai.jpg",
-                        height: 120,
-                        width: 120,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Text(
-                              "Bún Thái",
-                              style: AppWidget.semiBooldTextFieldStyle(),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Text(
-                              "(Tôm, kim chi, mực,...)",
-                              style: AppWidget.LightTextFieldStyle(),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25.0,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Text(
-                              "đ50.000",
-                              style: AppWidget.semiBooldTextFieldStyle(),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            Container(height: 270, child: allItems()),
+            allItemsVertically(),
           ],
         ),
       ),
@@ -245,11 +216,12 @@ class _HomeState extends State<Home> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             food = true;
             drink = false;
             quanao = false;
             family = false;
+            itemStream = await DatabaseMethods().getItem("Food");
             setState(() {});
           },
           child: Material(
@@ -271,11 +243,12 @@ class _HomeState extends State<Home> {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             food = false;
             drink = true;
             quanao = false;
             family = false;
+            itemStream = await DatabaseMethods().getItem("Drink");
             setState(() {});
           },
           child: Material(
@@ -297,11 +270,12 @@ class _HomeState extends State<Home> {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             food = false;
             drink = false;
             quanao = true;
             family = false;
+            itemStream = await DatabaseMethods().getItem("Quanao");
             setState(() {});
           },
           child: Material(
@@ -323,11 +297,12 @@ class _HomeState extends State<Home> {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             food = false;
             drink = false;
             quanao = false;
             family = true;
+            itemStream = await DatabaseMethods().getItem("Family");
             setState(() {});
           },
           child: Material(
