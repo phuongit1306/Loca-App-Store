@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loca_app2/pages/bottomnav.dart';
 import 'package:loca_app2/pages/login.dart';
 import 'package:loca_app2/widget/widget_support.dart';
 
@@ -19,6 +21,41 @@ class _SignUpState extends State<SignUp> {
   TextEditingController mailcontroller = new TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
+
+  registration() async {
+    if (password != null) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+
+        ScaffoldMessenger.of(context).showSnackBar((SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              "Đã đăng ký thành công",
+              style: TextStyle(fontSize: 20.0),
+            ))));
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => BottomNav()));
+      } on FirebaseException catch (e) {
+        if (e.code == 'mật khẩu yếu') {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Mật khẩu cung cấp quá yếu",
+                style: TextStyle(fontSize: 18.0),
+              )));
+        } else if (e.code == "email đã được sử dụng") {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Tài khoản đã tồn tại",
+                style: TextStyle(fontSize: 18.0),
+              )));
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +118,7 @@ class _SignUpState extends State<SignUp> {
                               height: 30.0,
                             ),
                             Text(
-                              "Sign up",
+                              "Đăng ký",
                               style: AppWidget.HeadlineTextFieldStyle(),
                             ),
                             SizedBox(
@@ -91,12 +128,12 @@ class _SignUpState extends State<SignUp> {
                               controller: namecontroller,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please Enter Name';
+                                  return 'Vui lòng nhập tên';
                                 }
                                 return null;
                               },
                               decoration: InputDecoration(
-                                  hintText: 'Name',
+                                  hintText: 'Tên',
                                   hintStyle:
                                       AppWidget.semiBooldTextFieldStyle(),
                                   prefixIcon: Icon(Icons.person_outlined)),
@@ -108,7 +145,7 @@ class _SignUpState extends State<SignUp> {
                               controller: mailcontroller,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please Enter E-mail';
+                                  return 'Vui lòng nhập E-mail';
                                 }
                                 return null;
                               },
@@ -125,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                               controller: passwordcontroller,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please Enter Password';
+                                  return 'Vui lòng nhập Password';
                                 }
                                 return null;
                               },
@@ -140,6 +177,16 @@ class _SignUpState extends State<SignUp> {
                               height: 80.0,
                             ),
                             GestureDetector(
+                              onTap: () async {
+                                if (_formkey.currentState!.validate()) {
+                                  setState(() {
+                                    email = mailcontroller.text;
+                                    name = namecontroller.text;
+                                    password = passwordcontroller.text;
+                                  });
+                                }
+                                registration();
+                              },
                               child: Material(
                                 elevation: 5.0,
                                 borderRadius: BorderRadius.circular(20),
@@ -151,7 +198,7 @@ class _SignUpState extends State<SignUp> {
                                       borderRadius: BorderRadius.circular(20)),
                                   child: Center(
                                       child: Text(
-                                    "SIGN UP",
+                                    "ĐĂNG KÝ",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18.0,
@@ -175,7 +222,7 @@ class _SignUpState extends State<SignUp> {
                             MaterialPageRoute(builder: (context) => LogIn()));
                       },
                       child: Text(
-                        "Already have an account? Login",
+                        "Đã có tài khoản? Đăng nhập",
                         style: AppWidget.semiBooldTextFieldStyle(),
                       ))
                 ],

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "108329738159",
+    "project_id": "locaapp-e1236",
+    "storage_bucket": "locaapp-e1236.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108329738159:android:3dfd40be3ef2cc04ff595a",
+        "android_client_info": {
+          "package_name": "com.example.loca_app2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq2YtB8DWhHxcSRqrTiQ7sCDIHmfFcoSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
