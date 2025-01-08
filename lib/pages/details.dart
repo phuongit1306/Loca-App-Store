@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loca_app2/service/database.dart';
+import 'package:loca_app2/service/shared_pref.dart';
 import 'package:loca_app2/widget/widget_support.dart';
 
 class Details extends StatefulWidget {
@@ -10,7 +12,25 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  int a = 1;
+  int a = 1, total = 0;
+  String? id;
+
+  getthesharedpref() async {
+    id = await SharedPreferenceHelper().getUserId();
+    setState(() {});
+  }
+
+  ontheLoad() async {
+    await getthesharedpref();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    ontheLoad();
+    total = int.parse(widget.price);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +68,7 @@ class _DetailsState extends State<Details> {
                   onTap: () {
                     if (a > 1) {
                       --a;
+                      total = total - int.parse(widget.price);
                     }
                     setState(() {});
                   },
@@ -74,6 +95,7 @@ class _DetailsState extends State<Details> {
                 GestureDetector(
                   onTap: () {
                     ++a;
+                    total = total + int.parse(widget.price);
                     setState(() {});
                   },
                   child: Container(
@@ -135,44 +157,60 @@ class _DetailsState extends State<Details> {
                         style: AppWidget.semiBooldTextFieldStyle(),
                       ),
                       Text(
-                        "\đ" + widget.price,
+                        "\đ" + total.toString(),
                         style: AppWidget.HeadlineTextFieldStyle(),
                       ),
                     ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 1.7,
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Thêm vào giỏ hàng",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontFamily: 'Poppins'),
-                        ),
-                        SizedBox(
-                          width: 30.0,
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Icon(
-                            Icons.shopping_cart_outlined,
-                            color: Colors.white,
+                  GestureDetector(
+                    onTap: () async {
+                      Map<String, dynamic> addItemToCart = {
+                        "Tên": widget.name,
+                        "Số lượng": a.toString(),
+                        "Tổng": total.toString(),
+                      };
+                      await DatabaseMethods().addItemToCart(addItemToCart, id!);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.orangeAccent,
+                          content: Text(
+                            "Mặt hàng đã được thêm vào giỏ hàng",
+                            style: TextStyle(fontSize: 18.0),
+                          )));
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 1.7,
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Thêm vào giỏ hàng",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16.0,
+                                fontFamily: 'Poppins'),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                      ],
+                          SizedBox(
+                            width: 30.0,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Icon(
+                              Icons.shopping_cart_outlined,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
