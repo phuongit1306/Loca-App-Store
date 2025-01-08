@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                                     )));
                       },
                       child: Container(
-                        margin: EdgeInsets.only(right: 20.0, bottom: 5.0),
+                        margin: EdgeInsets.only(right: 20.0, bottom: 15.0),
                         child: Material(
                           elevation: 5.0,
                           borderRadius: BorderRadius.circular(20),
@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
                                       width:
                                           MediaQuery.of(context).size.width / 2,
                                       child: Text(
-                                        "(Tôm, kim chi, mực,...)",
+                                        "(Sale)",
                                         style: AppWidget.LightTextFieldStyle(),
                                       ),
                                     ),
