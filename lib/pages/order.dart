@@ -17,6 +17,12 @@ class _OrderState extends State<Order> {
   String? id, wallet;
   int total = 0, amount2 = 0;
 
+  void startTimer() {
+    Timer(Duration(seconds: 3), () {
+      setState(() {});
+    });
+  }
+
   getthesharedpref() async {
     id = await SharedPreferenceHelper().getUserId();
     wallet = await SharedPreferenceHelper().getUserWallet();
@@ -32,6 +38,7 @@ class _OrderState extends State<Order> {
   @override
   void initState() {
     ontheload();
+    startTimer();
     super.initState();
   }
 
@@ -49,7 +56,7 @@ class _OrderState extends State<Order> {
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     DocumentSnapshot ds = snapshot.data.docs[index];
-                    total = total + int.parse(ds["Total"]);
+                    total = total + int.parse(ds["Tổng"]);
                     return Container(
                       margin: EdgeInsets.only(
                           left: 20.0, right: 20.0, bottom: 10.0),
@@ -68,7 +75,7 @@ class _OrderState extends State<Order> {
                                 decoration: BoxDecoration(
                                     border: Border.all(),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Center(child: Text(ds["Quantity"])),
+                                child: Center(child: Text(ds["Số lượng"])),
                               ),
                               SizedBox(
                                 width: 20.0,
@@ -79,11 +86,11 @@ class _OrderState extends State<Order> {
                               Column(
                                 children: [
                                   Text(
-                                    ds["Name"],
+                                    ds["Tên"],
                                     style: AppWidget.semiBooldTextFieldStyle(),
                                   ),
                                   Text(
-                                    "\$" + ds["Total"],
+                                    "\đ" + ds["Tổng"],
                                     style: AppWidget.semiBooldTextFieldStyle(),
                                   )
                                 ],
