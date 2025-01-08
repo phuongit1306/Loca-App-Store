@@ -16,23 +16,31 @@ class Order extends StatefulWidget {
 class _OrderState extends State<Order> {
   String? id, wallet;
   int total = 0, amount2 = 0;
+  Timer? _timer; // Lưu tham chiếu tới Timer
 
   void startTimer() {
-    Timer(Duration(seconds: 3), () {
-      setState(() {});
+    _timer = Timer(Duration(seconds: 3), () {
+      if (mounted) {
+        amount2 = total;
+        setState(() {});
+      }
     });
   }
 
   getthesharedpref() async {
     id = await SharedPreferenceHelper().getUserId();
     wallet = await SharedPreferenceHelper().getUserWallet();
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   ontheload() async {
     await getthesharedpref();
     foodStream = await DatabaseMethods().getCart(id!);
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -42,8 +50,13 @@ class _OrderState extends State<Order> {
     super.initState();
   }
 
-  Stream? foodStream;
+  @override
+  void dispose() {
+    _timer?.cancel(); // Hủy Timer khi widget bị hủy
+    super.dispose();
+  }
 
+  Stream? foodStream;
   Widget foodCart() {
     return StreamBuilder(
         stream: foodStream,
