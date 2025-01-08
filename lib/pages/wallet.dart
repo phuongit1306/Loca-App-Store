@@ -246,6 +246,11 @@ class _WalletState extends State<Wallet> {
         add = int.parse(wallet!) + int.parse(amount.replaceAll('.', ''));
         await SharedPreferenceHelper().saveUserWallet(add.toString());
         await DatabaseMethods().UpdateUserwallet(id!, add.toString());
+        await DatabaseMethods().clearCart(id!);
+
+        await ontheload(); // Reload giỏ hàng sau khi thanh toán
+        setState(() {}); // Cập nhật lại giao diện
+
         showDialog(
             context: context,
             builder: (_) => AlertDialog(

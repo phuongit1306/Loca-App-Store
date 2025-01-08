@@ -38,4 +38,24 @@ class DatabaseMethods {
         .collection("Cart")
         .snapshots();
   }
+
+  Future<void> clearCart(String userId) async {
+    try {
+      // Lấy tất cả các sản phẩm trong giỏ hàng
+      QuerySnapshot cartItems = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('Cart')
+          .get();
+
+      // Xóa từng sản phẩm
+      for (var doc in cartItems.docs) {
+        await doc.reference.delete();
+      }
+
+      print('Giỏ hàng đã được xóa thành công');
+    } catch (e) {
+      print('Lỗi khi xóa giỏ hàng: $e');
+    }
+  }
 }
